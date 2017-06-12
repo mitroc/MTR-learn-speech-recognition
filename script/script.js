@@ -6,10 +6,10 @@ const recognition = new SpeechRecognition();
 
 /* SR Settings */
 recognition.interimResults = true;  // Display results on the fly (even non-final).
-recognition.lang = 'pl'; 
+recognition.lang = 'pl';
 
 recognition.onresult = event => console.log(event);
 
+recognition.onend = () => recognition.start();
 
 recognition.start();
-
