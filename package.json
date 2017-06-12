@@ -1,0 +1,14 @@
+{
+  "name": "speech-recognition",
+  "version": "1.0.0",
+  "description": "Browser native(experimental) speech recognition tryouts.",
+  "main": "scripts.js",
+  "devDependencies": {
+    "browser-sync": "^2.18.12"
+  },
+  "scripts": {
+    "start" : "browser-sync start --server --files \"style/*.css, script/*.js, *.html\""
+},
+"author": "",
+  "license": "ISC"
+}
