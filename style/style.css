@@ -26,9 +26,51 @@ body {
 .speech-sentence {
   margin: 0 0 10px;
   /*text-transform: lowercase;*/
+  text-decoration: underline rgba(0, 0, 0, 0.2);
   line-height: initial;
+  font-size: 120%;
+  font-weight: 700;
 }
 
 .speech-sentence:first-letter {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
+
+.page-content.info {
+  display: flex;
+  justify-content: center;
+}
+
+.legend-title {
+  padding-bottom: 5px;
+  font-size: 90%;
+}
+
+.legend-scale {
+  display: flex;
+}
+
+.legend-scale p {
+  flex-grow: 1; 
+  margin: 5px;
+  text-align: center;
+  font-size: 80%;
+  font-weight: 700;
+}
+
+.legend-scale p:first-child {
+  color:#ff3d00;
+}
+
+.legend-scale p:nth-child(2) {
+  color: #ffa726;
+}
+
+.legend-scale p:nth-child(3) {
+  color: #7cb342;
+}
+
+.legend-scale p:last-child {
+  color: #1b5e20;
+}
+

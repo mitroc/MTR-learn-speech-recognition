@@ -41,13 +41,13 @@ function colorConfidence(event) {
   const confidence = event.results[0][0].confidence;
 
   if (confidence < 0.4) {
-    paragraph.style.color = 'red';
+    paragraph.style.color = '#ff3d00';
   } else if (confidence < 0.6) {
-    paragraph.style.color = 'orange';
+    paragraph.style.color = '#ffa726';
   } else if (confidence < 0.8) {
-    paragraph.style.color = 'blue';
+    paragraph.style.color = '#7cb342';
   } else if (confidence <= 1) {
-    paragraph.style.color = 'green';
+    paragraph.style.color = '#1b5e20';
   }
 }
 
