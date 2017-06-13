@@ -115,43 +115,87 @@ buttonsHandle();
 
 /* Recognize color */
 function getColor(event) {
-  const colors = ['beige', 'beżowy', 'black', 'czarny', 'blue', 'niebieski', 'brown', 'brązowy', 'gold', 'złoty', 'szary', 'gray', 'green', 'zielony', 'orange', 'pomarańczowy', 'pink', 'różowy', 'purple', 'fioletowy', 'czerwony', 'red', 'srebrny', 'silver', 'turquoise', 'turkusowy', 'purpurowy', 'violet', 'biały', 'white', 'żółty', 'yellow'];
+  const colors = ['aqua', 'azure', 'beige', 'bisque', 'black', 'blue', 'brown', 'chocolate', 'coral', 'crimson', 'cyan', 'fuchsia', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'indigo', 'ivory', 'khaki', 'lavender', 'lime', 'linen', 'magenta', 'maroon', 'moccasin', 'navy', 'olive', 'orange', 'orchid', 'peru', 'pink', 'plum', 'purple', 'red', 'salmon', 'sienna', 'silver', 'snow', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'white', 'yellow'];
   const isResultFinal = event.results[0].isFinal;
   const sentence = event.results[0][0].transcript.toLowerCase();
   const colorParagraph = document.querySelector('#color-example');
+
+  function animateElement(element, color) {
+    const keyframes = [
+      {
+        transform: 'translate3D(0,0,0) rotate(0) ',
+        color: color,
+        background: color,
+        borderRadius: '0%',
+        width: '100px',
+        height: '100px',
+        paddingBottom: 'initial'
+      },
+      {
+        transform: 'translate3D(0,50px,0) rotate(0) ',
+        color: color,
+        background: color,
+        borderRadius: '0%',
+        width: '50px',
+        height: '50px',
+        paddingBottom: 0
+      },
+      {
+        transform: 'translate3D(200px,50px,0) rotate(360deg) ',
+        color: color,
+        background: color,
+        borderRadius: '0%',
+        width: '50px',
+        height: '50px',
+        paddingBottom: 0
+      },
+      {
+        transform: 'translate3D(0,0,0) rotate(-360deg) ',
+        color: color,
+        background: color,
+        borderRadius: '50%',
+        width: '100px',
+        height: '100px',
+        paddingBottom: 0
+      },
+      {
+        transform: 'translate3D(0,0,0) rotate(-360deg) ',
+        color: color,
+        background: color,
+        borderRadius: '0%',
+        width: '100px',
+        height: '100px',
+        paddingBottom: 0
+      },
+      {
+        transform: 'translate3D(0,0,0) rotate(-360deg) ',
+        color: 'initial',
+        background: 'initial',
+        borderRadius: '0%',
+        width: 'initial',
+        height: 'initial',
+        paddingBottom: 'initial'
+      }
+    ];
+
+    const options = {
+      duration: 6000,
+      iterations: 1,
+    }
+
+    element.animate(
+      keyframes,
+      options
+    )
+  }
 
   if (isResultFinal) {
     colors.forEach(color => {
       let isColorIncluded = sentence.includes(color);
 
       if (isColorIncluded) {
-        colorParagraph.style.background = color;
-        colorParagraph.style.borderRadius = '50%';
-        colorParagraph.style.overflow = 'hidden';
-        colorParagraph.style.width = '50px';
-        colorParagraph.style.height = '50px';
-        animateElement(colorParagraph);
+        animateElement(colorParagraph, color);
       }
     })
   }
 }
-
-function animateElement(element) {
-  const keyframes = [
-    { transform: 'translateX(0) rotate(0) ', color: 'initial' },
-    { transform: 'translateX(100px) rotate(180deg) ', color: 'initial' },
-    { transform: 'translateX(0) rotate(360deg) ', color: 'initial' }
-  ];
-
-  const options = {
-    duration: 3000,
-    iterations: Infinity,
-  }
-
-  element.animate(
-    keyframes,
-    options
-  )
-}
-
-animateElement(document.querySelector('#color-example'));
