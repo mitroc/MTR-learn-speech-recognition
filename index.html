@@ -31,24 +31,26 @@
     </div>
     <main class="mdl-layout__content">
       <div class="custom-grid mdl-grid">
-        <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--8-col-tablet">
+        <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--4-col-tablet">
           <div class="page-content" id="speech">
             <!-- Speech recongition content here -->
           </div>
         </div>
-        <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--8-col-tablet">
+        <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--4-col-tablet">
           <div class="page-content info">
-            <div class='legend'>
-              <div class='legend-title'>Text color indicates how confident the speech recognition system is, that the recognition is correct:</div>
-              <div class='legend-scale'>
+            <div class="legend">
+              <div class="legend-title">Text color indicates how confident the speech recognition system is, that the recognition is correct:</div>
+              <div class="legend-scale">
                 <p>0 - 40%</p>
                 <p>40% - 60%</p>
                 <p>60% - 80%</p>
                 <p>80% - 100%</p>
               </div>
             </div>
-            <div>
-              <p></p>
+            <hr>
+            <div class="legend">
+              <div class="legend-title">The API can listen to certain words / sentences and react accordingly (eg. trigger an action).  </div>
+              <p class="legend-title" id="color-example">For example, it will change color of this paragraph when hears color's name (for the purpose of this example only a limited number of colors, the main ones, like blue, red, yellow etc.) </p>
             </div>
           </div>
         </div>

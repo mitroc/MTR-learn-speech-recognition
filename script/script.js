@@ -1,8 +1,10 @@
 /* Browser specific support.*/
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-/* Create a new instance of SR, that will control the recognition for the application. */
+/* Create a new instance of SR and SR grammar, that will control the recognition for the application. */
 const recognition = new SpeechRecognition();
+
+/* Helper to check if recognition is ongoing. */
 let isRecognizing;
 
 /* SR Settings */
@@ -18,6 +20,7 @@ recognition.onresult = event => {
   colorConfidence(event);
   appendNewLine(event);
   scrollContent(speech);
+  getColor(event);
 };
 
 /* Create a text field where the transctipt is displayed. */
@@ -110,5 +113,45 @@ function buttonsHandle() {
 }
 buttonsHandle();
 
+/* Recognize color */
+function getColor(event) {
+  const colors = ['beige', 'beżowy', 'black', 'czarny', 'blue', 'niebieski', 'brown', 'brązowy', 'gold', 'złoty', 'szary', 'gray', 'green', 'zielony', 'orange', 'pomarańczowy', 'pink', 'różowy', 'purple', 'fioletowy', 'czerwony', 'red', 'srebrny', 'silver', 'turquoise', 'turkusowy', 'purpurowy', 'violet', 'biały', 'white', 'żółty', 'yellow'];
+  const isResultFinal = event.results[0].isFinal;
+  const sentence = event.results[0][0].transcript.toLowerCase();
+  const colorParagraph = document.querySelector('#color-example');
 
+  if (isResultFinal) {
+    colors.forEach(color => {
+      let isColorIncluded = sentence.includes(color);
 
+      if (isColorIncluded) {
+        colorParagraph.style.background = color;
+        colorParagraph.style.borderRadius = '50%';
+        colorParagraph.style.overflow = 'hidden';
+        colorParagraph.style.width = '50px';
+        colorParagraph.style.height = '50px';
+        animateElement(colorParagraph);
+      }
+    })
+  }
+}
+
+function animateElement(element) {
+  const keyframes = [
+    { transform: 'translateX(0) rotate(0) ', color: 'initial' },
+    { transform: 'translateX(100px) rotate(180deg) ', color: 'initial' },
+    { transform: 'translateX(0) rotate(360deg) ', color: 'initial' }
+  ];
+
+  const options = {
+    duration: 3000,
+    iterations: Infinity,
+  }
+
+  element.animate(
+    keyframes,
+    options
+  )
+}
+
+animateElement(document.querySelector('#color-example'));

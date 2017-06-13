@@ -3,7 +3,8 @@ body {
 }
 
 .custom-grid {
-  max-width: 60%;
+  max-width: 800px;
+  justify-content: center;
 }
 
 .page-content {
@@ -38,7 +39,9 @@ body {
 
 .page-content.info {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+
 }
 
 .legend-title {
@@ -48,6 +51,7 @@ body {
 
 .legend-scale {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .legend-scale p {
@@ -73,4 +77,3 @@ body {
 .legend-scale p:last-child {
   color: #1b5e20;
 }
-
