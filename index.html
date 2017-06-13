@@ -32,12 +32,11 @@
     <main class="mdl-layout__content">
       <div class="custom-grid mdl-grid">
         <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--4-col-tablet">
-          <div class="page-content" id="speech">
-            <!-- Speech recongition content here -->
-          </div>
-        </div>
-        <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--4-col-tablet">
           <div class="page-content info">
+            <div class="legend">
+              <div class="legend-title">It is a simple example of an amazing experimental feature of Web APIs - the Speech Recognition Interface, <q>which provides the ability to recognize voice context from an audio input (normally via the device's default speech recognition service) and respond appropriately</q>.</div>
+            </div>
+            <hr>
             <div class="legend">
               <div class="legend-title">Text color indicates how confident the speech recognition system is, that the recognition is correct:</div>
               <div class="legend-scale">
@@ -49,15 +48,24 @@
             </div>
             <hr>
             <div class="legend">
-              <div class="legend-title">The API can listen to certain words / sentences and react accordingly (eg. trigger an action).  </div>
-              <p class="legend-descr" id="">For example it can change the transcripted text, and replace it with something else... or call the NSA, ABW or FSB. Just say "explosives", "bomb", "weapon". You can say "cat" or "kitten" too. Also in Polish. </p>
+              <div class="legend-title">The API can listen to certain words / sentences and react accordingly (eg. trigger an action). </div>
+              <p class="legend-descr" id="">For example it can change the transcripted text, and replace it with something else... or call the NSA, ABW
+                or FSB. Just say "explosives", "bomb", "weapon". You can say "cat" or "kitten" too. Also in Polish. </p>
             </div>
             <hr>
             <div class="legend">
-              <p class="legend-descr" id="color-example">Another example: it will change the color of this paragraph and triggers some animation when hears color's name (for the purpose of this example only a limited number of colors (English), the main ones, like <B>blue, red, yellow</b> etc.) </p>
+              <p class="legend-descr" id="color-example">Another example: it will change the color of this paragraph and triggers some animation when hears color's
+                name (for the purpose of this example only a limited number of colors (English), the main ones, like
+                <B>blue, red, yellow</b> etc.) </p>
             </div>
           </div>
         </div>
+        <div class="mdl-cell mdl-shadow--4dp mdl-cell--6-col mdl-cell--4-col-tablet">
+          <div class="page-content" id="speech">
+            <!-- Speech recongition content here -->
+          </div>
+        </div>
+
     </main>
     </div>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
