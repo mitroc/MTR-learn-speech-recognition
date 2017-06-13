@@ -15,6 +15,7 @@ recognition.onresult = event => {
   paragraph.textContent = sentence;
   colorConfidence(event);
   appendNewLine(event);
+  scrollContent();
 };
 
 recognition.onend = () => recognition.start();
@@ -26,6 +27,8 @@ paragraph.className = 'speech-sentence';
 
 const speech = document.querySelector('#speech');
 speech.appendChild(paragraph);
+
+
 
 /* Append new paragraphs when previous sentence is verified. */
 function appendNewLine (event) {
@@ -50,3 +53,9 @@ function colorConfidence (event) {
     paragraph.style.color = 'green';
   }
 }
+
+function scrollContent () {
+  const body = document.querySelector('body');
+  body.scrollTop = body.scrollHeight;
+}
+
