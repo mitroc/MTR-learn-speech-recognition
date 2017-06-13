@@ -59,23 +59,35 @@ function scrollContent(element) {
   element.scrollTop = speech.scrollHeight;
 }
 
-/* Start-Stop buttons event handler */
-function toggleStartStop(button) {
-  if (isRecognizing) {
-    recognition.stop();
-    recognition.onend = () => recognition.stop();
-    button.innerText = "Start Recording";
-    isRecognizing = false;
-  } else {
-    recognition.start();
-    recognition.onend = () => recognition.start();
-    button.innerText = "Stop Recording";
-    isRecognizing = true;
-  }
-}
-
 /* Add event listener to Start-Stop button */
-const startStopMainBtn = document.querySelector('#service-button-main');
-startStopMainBtn.addEventListener('click', function () {
-  toggleStartStop(this);
-}, false)
+function buttonsHandle() {
+  const startStopMainBtn = document.querySelector('#service-button-main');
+  const startStopSideBtn = document.querySelector('#service-button-side');
+  const startStopBtns = [startStopMainBtn, startStopSideBtn];
+
+  /* Start-Stop buttons event handler */
+  function toggleStartStop(buttons) {
+    if (isRecognizing) {
+      recognition.stop();
+      recognition.onend = () => recognition.stop();
+      buttons.forEach(btn => btn.innerText = "Start Recording");
+      isRecognizing = false;
+    } else {
+      recognition.start();
+      recognition.onend = () => recognition.start();
+      buttons.forEach(btn => btn.innerText = "Stop Recording");
+      isRecognizing = true;
+    }
+  }
+
+  /* Set event listeners */
+  startStopBtns.forEach(
+    btn => btn.addEventListener('click', function () {
+      toggleStartStop(startStopBtns);
+    })
+  );
+}
+buttonsHandle();
+
+
+
