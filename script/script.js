@@ -11,24 +11,26 @@ let isRecognizing;
 recognition.interimResults = true;  // Display results on the fly (even non-final).
 recognition.lang = 'en';
 
-/* Add event listener fired when service returns a recognised phrase. Unbinds when done. */
-recognition.onresult = event => {
-  // Get the transcripted sentence.
-  const sentence = event.results[0][0].transcript;
-  paragraph.textContent = sentence;
-
-  colorConfidence(event);
-  appendNewLine(event);
-  scrollContent(speech);
-  getColor(event);
-};
-
 /* Create a text field where the transctipt is displayed. */
 let paragraph = document.createElement('p');
 paragraph.className = 'speech-sentence';
 
 const speech = document.querySelector('#speech');
 speech.appendChild(paragraph);
+
+/* Add event listener fired when service returns a recognised phrase. Unbinds when done. */
+recognition.onresult = event => {
+  // Get the transcripted sentence.
+  const initialSentence = event.results[0][0].transcript;
+
+  paragraph.textContent = replaceWords(initialSentence);
+
+  showCat(event);
+  colorConfidence(event);
+  appendNewLine(event);
+  scrollContent(speech);
+  getColor(event);
+};
 
 /* Append new paragraphs when previous sentence is verified. */
 function appendNewLine(event) {
@@ -92,12 +94,12 @@ function buttonsHandle() {
 
   /* Language buttons event handler */
   function toggleLanguage(buttons, button) {
-    if (button.innerText === 'Switch Language: PL') {
+    if (button.innerText === 'Switch Recognition To Polish') {
       recognition.lang = 'pl';
       recognition.stop();
-      langBtns.forEach(btn => btn.innerText = 'Switch Language: EN')
+      langBtns.forEach(btn => btn.innerText = 'Switch Recognition To English')
     } else {
-      langBtns.forEach(btn => btn.innerText = 'Switch Language: PL')
+      langBtns.forEach(btn => btn.innerText = 'Switch Recognition To Polish')
       recognition.lang = 'en';
       recognition.stop();
     }
@@ -175,7 +177,23 @@ function getColor(event) {
         width: 'initial',
         height: 'initial',
         paddingBottom: 'initial'
-      }
+      }, {
+        transform: 'translate3D(0,0,0) rotate(-360deg) ',
+        color: 'initial',
+        background: 'initial',
+        borderRadius: '0%',
+        width: 'initial',
+        height: 'initial',
+        paddingBottom: 'initial'
+      }, {
+        transform: 'translate3D(0,0,0) rotate(-360deg) ',
+        color: 'initial',
+        background: 'initial',
+        borderRadius: '0%',
+        width: 'initial',
+        height: 'initial',
+        paddingBottom: 'initial'
+      },
     ];
 
     const options = {
@@ -197,5 +215,22 @@ function getColor(event) {
         animateElement(colorParagraph, color);
       }
     })
+  }
+}
+
+/* Replace text with something else */
+function replaceWords(text) {
+  return text
+    .replace(/explosive\S*|bomb\S*|weapon\S*|gun\S*|wybuch\S*|\bbroń|\bbroni\s|pistolet\S*/gi, '💣 I SEE YOU. ANTONIO M. !💀');
+}
+
+/* Replace text with cat picture */
+function showCat(event) {
+  const includedArr = event.results[0][0].transcript.match(/cat\S*|kitten\S*|kot\S*|kiciuś\S*|kicia\S*/gi);
+
+  if (includedArr && event.results[0].isFinal) {
+    let a = document.createElement('img');
+    a.src = 'http://loremflickr.com/160/120';
+    speech.appendChild(a);
   }
 }
