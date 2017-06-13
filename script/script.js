@@ -13,6 +13,7 @@ recognition.onresult = event => {
   // Get the transcripted sentence.
   const sentence = event.results[0][0].transcript;
   paragraph.textContent = sentence;
+  colorConfidence(event);
   appendNewLine(event);
 };
 
@@ -33,4 +34,19 @@ function appendNewLine (event) {
     paragraph.className = 'speech-sentence';
     speech.appendChild(paragraph);
   } 
+}
+
+/* Format output according to the confidence value */
+function colorConfidence (event) {
+  const confidence = event.results[0][0].confidence;
+
+  if (confidence < 0.4) {
+    paragraph.style.color = 'red';
+  } else if (confidence < 0.6) {
+    paragraph.style.color = 'orange';
+  } else if (confidence < 0.8) {
+    paragraph.style.color = 'blue';
+  } else if (confidence <= 1) {
+    paragraph.style.color = 'green';
+  }
 }
