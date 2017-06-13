@@ -13,14 +13,15 @@ recognition.onresult = event => {
   // Get the transcripted sentence.
   const sentence = event.results[0][0].transcript;
   paragraph.textContent = sentence;
-  
+
   colorConfidence(event);
   appendNewLine(event);
   scrollContent(speech);
 };
 
-recognition.onend = () => recognition.start();
-recognition.start();
+// recognition.onend = () => recognition.start();
+// recognition.start();
+let isRecognizing;
 
 /* Create a text field where the transctipt is displayed. */
 let paragraph = document.createElement('p');
@@ -58,3 +59,19 @@ function scrollContent(element) {
   element.scrollTop = speech.scrollHeight;
 }
 
+/* Start-Stop buttons event handler */
+function toggleStartStop() {
+  if (isRecognizing) {
+    recognition.stop();
+    recognition.onend = () => recognition.stop();
+    isRecognizing = false;
+  } else {
+    recognition.start();
+    recognition.onend = () => recognition.start();
+    isRecognizing = true;
+  }
+}
+
+/* Add event listener to Start-Stop button */
+const serviceMainBtn = document.querySelector('#service-button-main');
+serviceMainBtn.addEventListener('click', toggleStartStop, false)
