@@ -13,9 +13,10 @@ recognition.onresult = event => {
   // Get the transcripted sentence.
   const sentence = event.results[0][0].transcript;
   paragraph.textContent = sentence;
+  
   colorConfidence(event);
   appendNewLine(event);
-  scrollContent();
+  scrollContent(speech);
 };
 
 recognition.onend = () => recognition.start();
@@ -27,8 +28,6 @@ paragraph.className = 'speech-sentence';
 
 const speech = document.querySelector('#speech');
 speech.appendChild(paragraph);
-
-
 
 /* Append new paragraphs when previous sentence is verified. */
 function appendNewLine(event) {
@@ -54,8 +53,8 @@ function colorConfidence(event) {
   }
 }
 
-function scrollContent() {
-  const body = document.querySelector('body');
-  body.scrollTop = body.scrollHeight;
+/* Scrolls content to the top so the newly attached line is always visible */
+function scrollContent(element) {
+  element.scrollTop = speech.scrollHeight;
 }
 
