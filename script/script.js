@@ -31,16 +31,16 @@ speech.appendChild(paragraph);
 
 
 /* Append new paragraphs when previous sentence is verified. */
-function appendNewLine (event) {
-  if (event.results[0].isFinal) { 
+function appendNewLine(event) {
+  if (event.results[0].isFinal) {
     paragraph = document.createElement('p');
     paragraph.className = 'speech-sentence';
     speech.appendChild(paragraph);
-  } 
+  }
 }
 
 /* Format output according to the confidence value */
-function colorConfidence (event) {
+function colorConfidence(event) {
   const confidence = event.results[0][0].confidence;
 
   if (confidence < 0.4) {
@@ -54,7 +54,7 @@ function colorConfidence (event) {
   }
 }
 
-function scrollContent () {
+function scrollContent() {
   const body = document.querySelector('body');
   body.scrollTop = body.scrollHeight;
 }
