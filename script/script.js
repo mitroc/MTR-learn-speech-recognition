@@ -60,18 +60,22 @@ function scrollContent(element) {
 }
 
 /* Start-Stop buttons event handler */
-function toggleStartStop() {
+function toggleStartStop(button) {
   if (isRecognizing) {
     recognition.stop();
     recognition.onend = () => recognition.stop();
+    button.innerText = "Start Recording";
     isRecognizing = false;
   } else {
     recognition.start();
     recognition.onend = () => recognition.start();
+    button.innerText = "Stop Recording";
     isRecognizing = true;
   }
 }
 
 /* Add event listener to Start-Stop button */
-const serviceMainBtn = document.querySelector('#service-button-main');
-serviceMainBtn.addEventListener('click', toggleStartStop, false)
+const startStopMainBtn = document.querySelector('#service-button-main');
+startStopMainBtn.addEventListener('click', function () {
+  toggleStartStop(this);
+}, false)
