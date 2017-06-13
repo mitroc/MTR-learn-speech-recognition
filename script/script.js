@@ -3,10 +3,11 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 
 /* Create a new instance of SR, that will control the recognition for the application. */
 const recognition = new SpeechRecognition();
+let isRecognizing;
 
 /* SR Settings */
 recognition.interimResults = true;  // Display results on the fly (even non-final).
-recognition.lang = 'pl';
+recognition.lang = 'en';
 
 /* Add event listener fired when service returns a recognised phrase. Unbinds when done. */
 recognition.onresult = event => {
@@ -18,10 +19,6 @@ recognition.onresult = event => {
   appendNewLine(event);
   scrollContent(speech);
 };
-
-// recognition.onend = () => recognition.start();
-// recognition.start();
-let isRecognizing;
 
 /* Create a text field where the transctipt is displayed. */
 let paragraph = document.createElement('p');
@@ -71,7 +68,7 @@ function buttonsHandle() {
   /* Start-Stop buttons event handler */
   function toggleStartStop(buttons) {
     if (isRecognizing) {
-      recognition.stop();
+      recognition.abort();
       recognition.onend = () => recognition.stop();
       buttons.forEach(btn => btn.innerText = 'Start Recording');
       isRecognizing = false;
@@ -93,9 +90,13 @@ function buttonsHandle() {
   /* Language buttons event handler */
   function toggleLanguage(buttons, button) {
     if (button.innerText === 'Switch Language: PL') {
+      recognition.lang = 'pl';
+      recognition.stop();
       langBtns.forEach(btn => btn.innerText = 'Switch Language: EN')
     } else {
       langBtns.forEach(btn => btn.innerText = 'Switch Language: PL')
+      recognition.lang = 'en';
+      recognition.stop();
     }
   }
 
