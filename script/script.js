@@ -64,28 +64,48 @@ function buttonsHandle() {
   const startStopMainBtn = document.querySelector('#service-button-main');
   const startStopSideBtn = document.querySelector('#service-button-side');
   const startStopBtns = [startStopMainBtn, startStopSideBtn];
+  const langBtnMain = document.querySelector('#lang-button-main');
+  const langBtnSide = document.querySelector('#lang-button-side');
+  const langBtns = [langBtnMain, langBtnSide];
 
   /* Start-Stop buttons event handler */
   function toggleStartStop(buttons) {
     if (isRecognizing) {
       recognition.stop();
       recognition.onend = () => recognition.stop();
-      buttons.forEach(btn => btn.innerText = "Start Recording");
+      buttons.forEach(btn => btn.innerText = 'Start Recording');
       isRecognizing = false;
     } else {
       recognition.start();
       recognition.onend = () => recognition.start();
-      buttons.forEach(btn => btn.innerText = "Stop Recording");
+      buttons.forEach(btn => btn.innerText = 'Stop Recording');
       isRecognizing = true;
     }
   }
 
-  /* Set event listeners */
+  /* Set event listeners to Start-Stop buttons */
   startStopBtns.forEach(
     btn => btn.addEventListener('click', function () {
       toggleStartStop(startStopBtns);
     })
   );
+
+  /* Language buttons event handler */
+  function toggleLanguage(buttons, button) {
+    if (button.innerText === 'Switch Language: PL') {
+      langBtns.forEach(btn => btn.innerText = 'Switch Language: EN')
+    } else {
+      langBtns.forEach(btn => btn.innerText = 'Switch Language: PL')
+    }
+  }
+
+  /* Set event listeners to Language buttons */
+  langBtns.forEach(
+    btn => btn.addEventListener('click', function () {
+      toggleLanguage(langBtns, this);
+    }, false)
+  );
+
 }
 buttonsHandle();
 
